@@ -1,23 +1,26 @@
 defmodule Game do
+  def play do
+    hints = 'flour, water, yeast, bakery'
+    IO.puts "Hints: #{hints}"
 
-    def play do   
-        hints = "flour, water, yeast, bakery"
-        IO.puts "Hints: #{hints}"
+    guess_attempt = guess
+    attempt(guess_attempt)
+  end
 
-        guess = IO.gets "Guess the word: "
-        guess = String.strip(guess)
+  def guess, do: get_guess("Guess the word: ")
 
-        attempt(guess)
-    end
+  def guess(greeting), do: get_guess(greeting)
 
-    def attempt("bread") do
-        IO.puts "won!"
-    end
-    def attempt(wrong_guess) do
-        IO.puts "That is not correct!"
+  def get_guess(greeting) do
+    IO.gets(greeting) |> String.strip
+  end
 
-        guess = IO.gets "Try again: "
-        guess = String.strip(guess)
-        attempt(guess)
-    end
+  def attempt("bread"), do: IO.puts 'won!'
+
+  def attempt(_wrong_guess) do
+    IO.puts 'That is not correct!'
+    guess_attempt = guess("Try again: ")
+    attempt(guess_attempt)
+  end
+
 end
